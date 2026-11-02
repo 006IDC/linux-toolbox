@@ -1,0 +1,15 @@
+006IDC Linux 工具箱 / 006IDC Linux Toolbox
+Copyright 2026 006IDC contributors
+
+本项目是社区开源工具的整合与适配项目，不宣称全部功能由 006IDC 原创。
+菜单调度与部分系统维护逻辑基于 jcnf 的 Netflixxp/jcnf-box (Apache-2.0)。
+006IDC 提供中文统一入口、固定版本清单、入口摘要校验、运行确认、独立工作目录、
+错误处理、测试和整合文档；其他工具的核心能力归原作者及贡献者所有。
+
+jcnf-box: https://github.com/Netflixxp/jcnf-box
+Author: jcnf
+Original license: Apache License 2.0
+Changes by 006IDC, 2026: menu/runner refactor; BBR backup/restore adaptation.
+
+本项目不是任何上游项目的官方发行版，不表示获得上游作者背书。
+各独立组件继续遵守自身许可证。详见 THIRD_PARTY_NOTICES.md 和 licenses/。

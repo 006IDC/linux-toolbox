@@ -1,0 +1,61 @@
+{
+  "checked_on": "2026-11-02",
+  "upstreams": {
+    "jcnf": {
+      "repository": "Netflixxp/jcnf-box",
+      "ref": "main",
+      "commit": "40e9013eda2ef7bbbfddcf0b07d7a24f12894fb6",
+      "url": "https://github.com/Netflixxp/jcnf-box",
+      "license_file": "licenses/jcnf.txt"
+    },
+    "linuxmirrors": {
+      "repository": "SuperManito/LinuxMirrors",
+      "ref": "main",
+      "commit": "b52707f38e5800d48ac7cc3f390eafec9e948faf",
+      "url": "https://github.com/SuperManito/LinuxMirrors",
+      "license_file": "licenses/linuxmirrors.txt"
+    },
+    "kejilion": {
+      "repository": "kejilion/sh",
+      "ref": "main",
+      "commit": "c2993d56760a29d3e0cdda33757cc0b9a47935ad",
+      "url": "https://github.com/kejilion/sh",
+      "license_file": "licenses/kejilion.txt"
+    },
+    "ipquality": {
+      "repository": "xykt/IPQuality",
+      "ref": "main",
+      "commit": "87397e2c3196ec796f5477c83343c2354df601ea",
+      "url": "https://github.com/xykt/IPQuality",
+      "license_file": "licenses/ipquality.txt"
+    },
+    "yabs": {
+      "repository": "masonr/yet-another-bench-script",
+      "ref": "master",
+      "commit": "21f62408ecde9b23d4eec878f46a8292f1944aa0",
+      "url": "https://github.com/masonr/yet-another-bench-script",
+      "license_file": "licenses/yabs.txt"
+    },
+    "acme": {
+      "repository": "acmesh-official/acme.sh",
+      "ref": "master",
+      "commit": "37d064f7b580055d3f2ddf9a9c960f754f3694d6",
+      "url": "https://github.com/acmesh-official/acme.sh",
+      "license_file": "licenses/acme.txt"
+    },
+    "nexttrace": {
+      "repository": "nxtrace/NTrace-core",
+      "ref": "v1.7.5",
+      "commit": "7ff73b2c51f9f37a9bc1d6139b7053948f0250db",
+      "url": "https://github.com/nxtrace/NTrace-core",
+      "license_file": "licenses/nexttrace.txt"
+    },
+    "ecs": {
+      "repository": "oneclickvirt/ecs",
+      "ref": "v0.2.17",
+      "commit": "01a8003f840292396d1364a1dfef82a9a8f8b597",
+      "url": "https://github.com/oneclickvirt/ecs",
+      "license_file": "licenses/ecs.txt"
+    }
+  }
+}

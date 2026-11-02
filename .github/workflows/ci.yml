@@ -1,0 +1,64 @@
+name: Verify integration
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  maintenance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Actual maintenance and restoration in a disposable VM
+        run: sudo --preserve-env=GITHUB_ACTIONS bash scripts/linux-maintenance-check.sh
+  launcher:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Offline regression and source contracts
+        run: |
+          bash -n toolbox.sh modules/bbr.sh vendor/jcnf/swap.sh
+          python3 -m unittest discover -s tests -v
+          python3 scripts/check_upstreams.py
+      - name: Native Linux help and executable dispatch
+        run: |
+          bash toolbox.sh info
+          bash toolbox.sh run nexttrace --yes -- --help
+          bash toolbox.sh run ecs --yes -- -h
+          bash toolbox.sh run acme --yes -- --help
+          sudo bash toolbox.sh run mirrors --yes -- --help
+          sudo bash toolbox.sh run docker-registry --yes -- --help
+          bash toolbox.sh run yabs --yes -- -h
+          bash toolbox.sh verify ipquality
+          bash toolbox.sh verify kejilion
+  mirror-switch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ['debian:12', 'ubuntu:24.04']
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Actual source switch in a disposable container
+        run: |
+          docker run --rm -v "$PWD:/toolbox:ro" "${{ matrix.image }}" bash -ec '
+            apt-get update -qq
+            apt-get install -y -qq curl ca-certificates procps
+            cp -a /etc/apt /tmp/apt-before
+            bash /toolbox/toolbox.sh run mirrors --yes -- \
+              --source mirrors.ustc.edu.cn --source-security mirrors.ustc.edu.cn \
+              --protocol https --backup true --upgrade-software false --clean-screen false
+            grep -R "mirrors.ustc.edu.cn" /etc/apt/sources.list* /etc/apt/sources.list.d/
+            apt-get update -qq
+            find /etc/apt -iname "*bak*" -o -iname "*backup*" | tee /tmp/backup-files
+            test -s /tmp/backup-files
+          '
