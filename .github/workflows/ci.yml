@@ -25,9 +25,14 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Offline regression and source contracts
         run: |
-          bash -n toolbox.sh modules/bbr.sh vendor/jcnf/swap.sh
+          bash -n start.sh toolbox.sh modules/bbr.sh vendor/jcnf/swap.sh
           python3 -m unittest discover -s tests -v
           python3 scripts/check_upstreams.py
+      - name: Bootstrap fixed release and preserve interactive input
+        run: |
+          bash start.sh --version | grep -Fx '0.1.0'
+          bash <(cat start.sh) list | grep 'mirrors'
+          python3 tests/check_start_terminal.py
       - name: Native Linux help and executable dispatch
         run: |
           bash toolbox.sh info

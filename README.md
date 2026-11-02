@@ -39,6 +39,25 @@
 
 ## 使用与升级
 
+一条命令启动（不需要 Git）：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/006IDC/linux-toolbox/main/start.sh)
+```
+
+启动入口自动获取固定的 `0.1.0` 发行包，校验内置 SHA256 后打开中文菜单。退出后清理临时源码，不安装常驻服务或全局命令；上游工具自身产生的配置仍按原行为保存。需要修改系统时，请在 root 终端执行同一条命令。
+
+也可以直接带工具箱参数：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/006IDC/linux-toolbox/main/start.sh) list
+bash <(curl -fsSL https://raw.githubusercontent.com/006IDC/linux-toolbox/main/start.sh) show mirrors
+```
+
+支持的依赖为 Bash 4+、curl、CA 证书、tar/gzip，以及 `sha256sum` 或 `shasum`。远程入口地址会随维护更新，所启动的发行版和摘要在 `start.sh` 中明确固定。
+
+需要保留源码时，仍可使用 Git 安装。
+
 先准备依赖，例如 Debian / Ubuntu：
 
 ```bash
